@@ -6,6 +6,7 @@ import { Button } from "@/app/_shared/components/ui/button";
 import { Card, CardContent } from "@/app/_shared/components/ui/card";
 import type { Company } from "@/app/_shared/types/company.type";
 import { Banknote, Building2, Calendar, Clock, Hourglass, User, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { SortOption } from "../SortSheet/SortSheet";
 
 type CompanyCardProps = {
@@ -23,6 +24,8 @@ export function CompanyCard({
   showAddButton = true,
   highlightMetric,
 }: CompanyCardProps) {
+  const router = useRouter();
+
   // Helper to get highlighting classes
   const getHighlightClass = (metricKey: SortOption) => {
     return highlightMetric === metricKey
@@ -30,8 +33,15 @@ export function CompanyCard({
       : "";
   };
 
+  const handleCardClick = () => {
+    router.push(`/companies/${company.id}`);
+  };
+
   return (
-    <Card className={`w-full transition-all duration-200 hover:shadow-lg ${isInCart ? "ring-2 ring-primary border-primary" : ""}`}>
+    <Card 
+      className={`w-full transition-all duration-200 hover:shadow-lg cursor-pointer ${isInCart ? "ring-2 ring-primary border-primary" : ""}`}
+      onClick={handleCardClick}
+    >
       <CardContent className="p-3 md:p-5 flex flex-col h-full">
         {/* Header: Context & Action */}
         <div className="flex justify-between items-start mb-1 md:mb-3">
@@ -41,7 +51,10 @@ export function CompanyCard({
           
           {showAddButton && onAddToCart && (
             <Button
-              onClick={() => onAddToCart(company)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToCart(company);
+              }}
               size="sm"
               className={`rounded-full h-8 px-4 text-xs font-bold transition-all ${
                 isInCart 

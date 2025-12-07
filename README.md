@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# キギョヒカ - 企業比較アプリ
 
-## Getting Started
+**「企業データを、分かりやすく比較できる就活アプリ」**
 
-First, run the development server:
+キギョヒカは、企業のデータを可視化し、複数企業の情報を直感的に比較できるWebアプリケーションです。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 主な機能
+
+- **リアルタイム検索**: 社名、業種、タグなどで企業を瞬時に検索
+- **企業比較**: 気になる企業をカートに入れ、最大4社まで並べて比較可能
+- **詳細フィルター**: 年収、残業時間、有休取得率などで絞り込み
+- **ログイン不要**: 面倒な登録なしですぐに使えます
+
+## 🛠 技術スタック
+
+- **Frontend**: Next.js (App Router), React, TypeScript
+- **Styling**: Tailwind CSS
+- **Search**: Fuse.js
+- **Data Processing (ETL)**: Python
+
+## 📂 ディレクトリ構成
+
+```
+comp2-web/
+├── app/                  # Next.js App Router
+│   ├── (route)/          # ページコンポーネント
+│   ├── _shared/          # 共通コンポーネント・型定義
+│   └── ...
+├── docs/                 # ドキュメント (設計書など)
+├── public/               # 静的ファイル
+├── scripts/              # データ生成用スクリプト
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏁 開発の始め方
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 前提条件
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (v18以上推奨)
+- npm, yarn, pnpm, or bun
 
-## Learn More
+### インストールと起動
 
-To learn more about Next.js, take a look at the following resources:
+1. リポジトリをクローンします
+2. 依存関係をインストールします
+   ```bash
+   pnpm install
+   ```
+3. 開発サーバーを起動します
+   ```bash
+   pnpm dev
+   ```
+4. [http://localhost:3000](http://localhost:3000) にアクセスしてください
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📊 データ更新について
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+企業データは `scripts/generate_data.py` を使用して生成されます（現在はモックデータまたは既存のJSONを使用）。

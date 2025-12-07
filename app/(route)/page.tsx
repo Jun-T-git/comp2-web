@@ -7,6 +7,7 @@ import {
 } from "@/app/_client-only/_service/storage/storage.service";
 import companiesData from "@/app/_shared/data/companies.json";
 import type { Company } from "@/app/_shared/types/company.type";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { CompanyCard } from "./_components/CompanyCard/CompanyCard";
 import { ComparisonCart } from "./_components/ComparisonCart/ComparisonCart";
@@ -18,6 +19,7 @@ import { SortOption, SortSheet } from "./_components/SortSheet/SortSheet";
 const companies = companiesData as Company[];
 
 export default function Home() {
+  const router = useRouter();
   const [cartIds, setCartIds] = useState<string[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   
@@ -150,8 +152,8 @@ export default function Home() {
 
   const handleCompare = () => {
     if (cartIds.length >= 2) {
-      // TODO: 比較ページへ遷移
-      alert(`比較機能は次のステップで実装します: ${cartIds.join(", ")}`);
+      const ids = cartIds.join(",");
+      router.push(`/compare?companyIds=${ids}`);
     }
   };
 
