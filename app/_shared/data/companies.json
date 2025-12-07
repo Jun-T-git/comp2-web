@@ -1,0 +1,262 @@
+[
+  {
+    "id": "7203",
+    "name": "トヨタ自動車",
+    "kana": "トヨタジドウシャ",
+    "industry": "輸送用機器",
+    "metrics": {
+      "salary": 895,
+      "age": 40.4,
+      "duration": 16.4,
+      "employees": 70710,
+      "revenue": 371542,
+      "profit_margin": 7.3,
+      "equity_ratio": 39.8,
+      "overtime": 24.5,
+      "paid_leave": 82.0,
+      "hourly_wage": 3250
+    },
+    "content": {
+      "summary": "世界最大級の自動車メーカー。ハイブリッド車のパイオニアであり、近年はEVや水素燃料電池車の開発にも注力。安定した財務基盤を持つ。",
+      "risk_text": "EV化の波に対する対応速度が課題。国内市場の縮小リスクあり。",
+      "tags": ["グローバル", "製造業", "安定", "大企業"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  },
+  {
+    "id": "6758",
+    "name": "ソニーグループ",
+    "kana": "ソニーグループ",
+    "industry": "電気機器",
+    "metrics": {
+      "salary": 1084,
+      "age": 42.4,
+      "duration": 16.7,
+      "employees": 2839,
+      "revenue": 130973,
+      "profit_margin": 10.2,
+      "equity_ratio": 23.1,
+      "overtime": 28.0,
+      "paid_leave": 75.0,
+      "hourly_wage": 3680
+    },
+    "content": {
+      "summary": "エンタメ・半導体・金融など多角化経営の総合企業。PlayStation、音楽、映画事業が収益の柱。クリエイティブな社風が特徴。",
+      "risk_text": "持株会社のため、実際の労働環境は子会社により異なる可能性あり。",
+      "tags": ["エンタメ", "テック", "グローバル", "多角化"]
+    },
+    "flags": {
+      "is_holding": true
+    }
+  },
+  {
+    "id": "9984",
+    "name": "ソフトバンクグループ",
+    "kana": "ソフトバンクグループ",
+    "industry": "情報・通信業",
+    "metrics": {
+      "salary": 1405,
+      "age": 40.5,
+      "duration": 9.8,
+      "employees": 247,
+      "revenue": 67215,
+      "profit_margin": -15.2,
+      "equity_ratio": 21.5,
+      "overtime": null,
+      "paid_leave": null,
+      "hourly_wage": 5100
+    },
+    "content": {
+      "summary": "世界最大級のテクノロジー投資会社。Arm、アリババなど大型投資で知られる。孫正義氏のリーダーシップの下、積極的なM&A戦略を展開。",
+      "risk_text": "投資事業のボラティリティが高く、業績変動が激しい。持株会社のため従業員数が極めて少ない。",
+      "tags": ["投資", "テック", "ベンチャー", "高年収"]
+    },
+    "flags": {
+      "is_holding": true
+    }
+  },
+  {
+    "id": "4755",
+    "name": "楽天グループ",
+    "kana": "ラクテングループ",
+    "industry": "サービス業",
+    "metrics": {
+      "salary": 797,
+      "age": 34.3,
+      "duration": 4.7,
+      "employees": 8409,
+      "revenue": 19279,
+      "profit_margin": -18.5,
+      "equity_ratio": 4.2,
+      "overtime": 35.0,
+      "paid_leave": 68.0,
+      "hourly_wage": 2550
+    },
+    "content": {
+      "summary": "EC、金融、モバイルを展開する総合IT企業。楽天市場を中心としたエコシステム戦略を推進。社内公用語は英語。",
+      "risk_text": "モバイル事業への巨額投資により財務状況が悪化。自己資本比率が低い。",
+      "tags": ["IT", "EC", "金融", "成長志向"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  },
+  {
+    "id": "6861",
+    "name": "キーエンス",
+    "kana": "キーエンス",
+    "industry": "電気機器",
+    "metrics": {
+      "salary": 2279,
+      "age": 35.2,
+      "duration": 12.0,
+      "employees": 2788,
+      "revenue": 9224,
+      "profit_margin": 54.1,
+      "equity_ratio": 93.8,
+      "overtime": 45.0,
+      "paid_leave": 55.0,
+      "hourly_wage": 6890
+    },
+    "content": {
+      "summary": "FA（ファクトリーオートメーション）センサーの世界的メーカー。超高収益・高年収で知られ、営業力と企画力に定評あり。",
+      "risk_text": "高い成果主義で労働強度が高いとの声あり。残業時間が45時間に達している。",
+      "tags": ["高年収", "製造業", "成果主義", "BtoB"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  },
+  {
+    "id": "8035",
+    "name": "東京エレクトロン",
+    "kana": "トウキョウエレクトロン",
+    "industry": "電気機器",
+    "metrics": {
+      "salary": 1398,
+      "age": 43.6,
+      "duration": 18.0,
+      "employees": 1978,
+      "revenue": 22090,
+      "profit_margin": 29.3,
+      "equity_ratio": 72.1,
+      "overtime": 22.0,
+      "paid_leave": 78.0,
+      "hourly_wage": 5120
+    },
+    "content": {
+      "summary": "半導体製造装置で世界トップクラス。AI・5G需要で業績好調。技術者中心の安定した企業文化。",
+      "risk_text": "半導体市況の影響を受けやすい。シリコンサイクルによる業績変動リスクあり。",
+      "tags": ["半導体", "製造業", "高年収", "技術志向"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  },
+  {
+    "id": "9432",
+    "name": "日本電信電話",
+    "kana": "ニッポンデンシンデンワ",
+    "industry": "情報・通信業",
+    "metrics": {
+      "salary": 952,
+      "age": 41.8,
+      "duration": 16.9,
+      "employees": 2454,
+      "revenue": 131362,
+      "profit_margin": 14.8,
+      "equity_ratio": 33.5,
+      "overtime": 18.0,
+      "paid_leave": 92.0,
+      "hourly_wage": 3680
+    },
+    "content": {
+      "summary": "NTTグループの持株会社。ドコモ、データ、コムウェアなど傘下に多数の事業会社を持つ。安定した通信インフラ事業が強み。",
+      "risk_text": "持株会社のため、実際の業務は子会社配属となる可能性が高い。",
+      "tags": ["通信", "インフラ", "安定", "大企業"]
+    },
+    "flags": {
+      "is_holding": true
+    }
+  },
+  {
+    "id": "4519",
+    "name": "中外製薬",
+    "kana": "チュウガイセイヤク",
+    "industry": "医薬品",
+    "metrics": {
+      "salary": 1214,
+      "age": 43.2,
+      "duration": 15.8,
+      "employees": 5765,
+      "revenue": 11114,
+      "profit_margin": 38.5,
+      "equity_ratio": 67.2,
+      "overtime": 15.0,
+      "paid_leave": 88.0,
+      "hourly_wage": 4850
+    },
+    "content": {
+      "summary": "ロシュ傘下の製薬会社。がん領域に強み。研究開発型で革新的な新薬を創出。ワークライフバランスに配慮した働き方を推進。",
+      "risk_text": "親会社ロシュとの関係性や、特定薬品への依存度が課題となる可能性あり。",
+      "tags": ["製薬", "研究開発", "外資系", "ホワイト"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  },
+  {
+    "id": "7974",
+    "name": "任天堂",
+    "kana": "ニンテンドウ",
+    "industry": "その他製品",
+    "metrics": {
+      "salary": 988,
+      "age": 39.8,
+      "duration": 14.2,
+      "employees": 2779,
+      "revenue": 16016,
+      "profit_margin": 35.5,
+      "equity_ratio": 79.3,
+      "overtime": 12.0,
+      "paid_leave": 85.0,
+      "hourly_wage": 4020
+    },
+    "content": {
+      "summary": "世界的ゲーム企業。Switch、マリオ、ゼルダなど強力IPを多数保有。京都本社で独自の企業文化を維持。堅実な財務経営。",
+      "risk_text": "ゲームハードのサイクルに業績が左右される。次世代機の成否が重要。",
+      "tags": ["ゲーム", "エンタメ", "グローバル", "ホワイト"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  },
+  {
+    "id": "2914",
+    "name": "日本たばこ産業",
+    "kana": "ニホンタバコサンギョウ",
+    "industry": "食料品",
+    "metrics": {
+      "salary": 904,
+      "age": 42.5,
+      "duration": 18.5,
+      "employees": 5765,
+      "revenue": 27841,
+      "profit_margin": 24.1,
+      "equity_ratio": 49.8,
+      "overtime": 14.0,
+      "paid_leave": 80.0,
+      "hourly_wage": 3620
+    },
+    "content": {
+      "summary": "たばこ事業を中心に医薬品・加工食品も展開。海外売上比率が高くグローバル展開を推進。高配当で株主還元に積極的。",
+      "risk_text": "たばこ市場の縮小傾向が長期的なリスク。ESG観点での評価に課題あり。",
+      "tags": ["グローバル", "高配当", "安定", "ディフェンシブ"]
+    },
+    "flags": {
+      "is_holding": false
+    }
+  }
+]

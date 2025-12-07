@@ -1,0 +1,69 @@
+@startuml トップページ初期表示
+
+title トップページ初期表示シーケンス
+
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+skinparam maxmessagesize 200
+
+actor ユーザー as User
+participant "ブラウザ" as Browser
+participant "Next.js\n(SSG静的ページ)" as NextJS
+participant "LocalStorage" as LocalStorage
+participant "companies.json\n(静的データ)" as JSON
+participant "Fuse.js\n(検索エンジン)" as Fuse
+
+== ページ読み込み ==
+
+User -> Browser : トップページにアクセス
+activate Browser
+
+Browser -> NextJS : 静的HTMLをリクエスト
+activate NextJS
+NextJS --> Browser : 静的HTML/JS/CSSを返却
+deactivate NextJS
+
+Browser -> JSON : 企業データ(companies.json)を読み込み
+activate JSON
+JSON --> Browser : 企業データ一覧を返却
+deactivate JSON
+
+Browser -> Fuse : Fuse.jsを初期化\n(企業データをインデックス化)
+activate Fuse
+Fuse --> Browser : 検索インデックス準備完了
+deactivate Fuse
+
+== 閲覧履歴の復元 ==
+
+Browser -> LocalStorage : 閲覧履歴を取得
+activate LocalStorage
+LocalStorage --> Browser : 過去の比較履歴データ
+deactivate LocalStorage
+
+Browser -> Browser : 履歴セクションをレンダリング
+
+== 比較カートの復元 ==
+
+Browser -> LocalStorage : 保存済み比較カートを取得
+activate LocalStorage
+LocalStorage --> Browser : カート内の企業ID一覧
+deactivate LocalStorage
+
+Browser -> Browser : 比較カートUIを復元\n(最大4社)
+
+== ランダム提案（ガチャ）の表示 ==
+
+Browser -> JSON : 隠れ優良企業をフィルタリング\n(時給高 or 利益率高)
+activate JSON
+JSON --> Browser : 該当企業リスト
+deactivate JSON
+
+Browser -> Browser : ランダムに企業を選択して表示
+
+== 初期表示完了 ==
+
+Browser --> User : トップページ表示完了\n・検索フォーム\n・閲覧履歴\n・比較カート\n・ランダム提案
+deactivate Browser
+
+@enduml
