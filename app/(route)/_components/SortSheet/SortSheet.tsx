@@ -46,7 +46,7 @@ export function SortSheet({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="h-10 w-10 shrink-0">
+        <Button variant="ghost" size="icon" className="h-10 w-10 shrink-0 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors">
           <ArrowUpDown className="h-4 w-4" />
         </Button>
       </SheetTrigger>

@@ -5,7 +5,7 @@ import { Badge } from "@/app/_shared/components/ui/badge";
 import { Button } from "@/app/_shared/components/ui/button";
 import { Card, CardContent } from "@/app/_shared/components/ui/card";
 import type { Company } from "@/app/_shared/types/company.type";
-import { AlertTriangle, Banknote, Building2, Calendar, Clock, Hourglass, User, Users } from "lucide-react";
+import { Banknote, Building2, Calendar, Clock, Hourglass, User, Users } from "lucide-react";
 import { SortOption } from "../SortSheet/SortSheet";
 
 type CompanyCardProps = {
@@ -32,9 +32,9 @@ export function CompanyCard({
 
   return (
     <Card className={`w-full transition-all duration-200 hover:shadow-lg ${isInCart ? "ring-2 ring-primary border-primary" : ""}`}>
-      <CardContent className="p-5 flex flex-col h-full">
+      <CardContent className="p-3 md:p-5 flex flex-col h-full">
         {/* Header: Context & Action */}
-        <div className="flex justify-between items-start mb-3">
+        <div className="flex justify-between items-start mb-1 md:mb-3">
           <Badge variant="outline" className="text-xs text-muted-foreground font-medium bg-background">
             {company.industry}
           </Badge>
@@ -60,20 +60,20 @@ export function CompanyCard({
             <h3 className="text-xl font-bold text-foreground leading-snug">
               {company.name}
             </h3>
-            {company.flags.is_holding && (
+            {/* {company.flags.is_holding && (
               <Badge variant="destructive" className="h-5 px-1.5 text-[10px] gap-0.5">
                 <AlertTriangle className="h-3 w-3" />
                 HD
               </Badge>
-            )}
+            )} */}
           </div>
-          <div className="flex flex-wrap gap-1.5 opacity-80">
+          {/* <div className="flex flex-wrap gap-1.5 opacity-80">
             {company.content.tags.slice(0, 3).map((tag) => (
               <span key={tag} className="text-xs text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
                 #{tag}
               </span>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Compact Metrics Grid (7 Items) - Uniform Layout */}
@@ -91,16 +91,16 @@ export function CompanyCard({
           <div className={`flex items-center justify-between text-xs border-b border-border/40 pb-1 ${getHighlightClass("overtime")}`}>
             <div className="flex items-center gap-1.5 text-muted-foreground transition-colors inherit">
               <Clock className="w-3.5 h-3.5" />
-              <span>残業</span>
+              <span>平均残業</span>
             </div>
-            <div className="font-semibold">{company.metrics.overtime ?? "-"} <span className="text-[10px] font-normal text-muted-foreground">h</span></div>
+            <div className="font-semibold">{company.metrics.overtime ?? "-"} <span className="text-[10px] font-normal text-muted-foreground">時間/月</span></div>
           </div>
 
           {/* 3. Paid Leave */}
           <div className={`flex items-center justify-between text-xs border-b border-border/40 pb-1 ${getHighlightClass("paid_leave")}`}>
             <div className="flex items-center gap-1.5 text-muted-foreground transition-colors inherit">
               <Calendar className="w-3.5 h-3.5" />
-              <span>有休</span>
+              <span>有休取得</span>
             </div>
             <div className="font-semibold">{company.metrics.paid_leave ?? "-"} <span className="text-[10px] font-normal text-muted-foreground">%</span></div>
           </div>
@@ -109,7 +109,7 @@ export function CompanyCard({
           <div className={`flex items-center justify-between text-xs border-b border-border/40 pb-1 ${getHighlightClass("age")}`}>
             <div className="flex items-center gap-1.5 text-muted-foreground transition-colors inherit">
               <User className="w-3.5 h-3.5" />
-              <span>年齢</span>
+              <span>平均年齢</span>
             </div>
             <div className="font-semibold">{company.metrics.age} <span className="text-[10px] font-normal text-muted-foreground">歳</span></div>
           </div>
@@ -118,7 +118,7 @@ export function CompanyCard({
           <div className={`flex items-center justify-between text-xs border-b border-border/40 pb-1 ${getHighlightClass("duration")}`}>
             <div className="flex items-center gap-1.5 text-muted-foreground transition-colors inherit">
               <Hourglass className="w-3.5 h-3.5" />
-              <span>勤続</span>
+              <span>平均勤続</span>
             </div>
             <div className="font-semibold">{company.metrics.duration} <span className="text-[10px] font-normal text-muted-foreground">年</span></div>
           </div>
@@ -127,7 +127,7 @@ export function CompanyCard({
           <div className={`flex items-center justify-between text-xs border-b border-border/40 pb-1 ${getHighlightClass("employees")}`}>
             <div className="flex items-center gap-1.5 text-muted-foreground transition-colors inherit">
               <Users className="w-3.5 h-3.5" />
-              <span>従業員</span>
+              <span>従業員数</span>
             </div>
             <div className="font-semibold">{company.metrics.employees.toLocaleString()} <span className="text-[10px] font-normal text-muted-foreground">人</span></div>
           </div>
@@ -136,7 +136,7 @@ export function CompanyCard({
           <div className={`flex items-center justify-between text-xs border-b border-border/40 pb-1 ${getHighlightClass("revenue")}`}>
             <div className="flex items-center gap-1.5 text-muted-foreground transition-colors inherit">
               <Building2 className="w-3.5 h-3.5" />
-              <span>売上</span>
+              <span>売上高</span>
             </div>
             <div className="font-semibold">{company.metrics.revenue.toLocaleString()} <span className="text-[10px] font-normal text-muted-foreground">億</span></div>
           </div>

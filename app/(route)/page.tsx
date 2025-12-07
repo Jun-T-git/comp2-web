@@ -4,7 +4,6 @@
 import {
   loadCart,
   saveCart,
-  saveHistory,
 } from "@/app/_client-only/_service/storage/storage.service";
 import companiesData from "@/app/_shared/data/companies.json";
 import type { Company } from "@/app/_shared/types/company.type";
@@ -12,6 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { CompanyCard } from "./_components/CompanyCard/CompanyCard";
 import { ComparisonCart } from "./_components/ComparisonCart/ComparisonCart";
 import { AdvancedFilters, FilterSheet, initialAdvancedFilters } from "./_components/FilterSheet/FilterSheet";
+import { Hero } from "./_components/Hero/Hero";
 import { SearchBar } from "./_components/SearchBar/SearchBar";
 import { SortOption, SortSheet } from "./_components/SortSheet/SortSheet";
 
@@ -25,6 +25,7 @@ export default function Home() {
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState<SortOption | null>("salary");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Advanced Filters State
   const [advancedFilters, setAdvancedFilters] = useState<AdvancedFilters>(initialAdvancedFilters);
@@ -53,11 +54,18 @@ export default function Home() {
   const handleClearFilters = () => {
     setAdvancedFilters(initialAdvancedFilters);
     setSelectedIndustries([]);
+    setSearchQuery("");
   };
 
   // フィルタリングとソートの適用
   const filteredAndSortedCompanies = useMemo(() => {
     let result = [...companies];
+
+    // 検索クエリによるフィルタリング (部分一致)
+    if (searchQuery.trim()) {
+      const query = searchQuery.trim().toLowerCase();
+      result = result.filter(c => c.name.toLowerCase().includes(query));
+    }
 
     // 業種フィルター (Multi-select OR logic)
     if (selectedIndustries.length > 0) {
@@ -107,7 +115,7 @@ export default function Home() {
     }
 
     return result;
-  }, [selectedIndustries, sortOption, sortOrder, advancedFilters]);
+  }, [selectedIndustries, sortOption, sortOrder, advancedFilters, searchQuery]);
 
   // LocalStorageからカートを復元
   useEffect(() => {
@@ -142,7 +150,6 @@ export default function Home() {
 
   const handleCompare = () => {
     if (cartIds.length >= 2) {
-      saveHistory(cartIds);
       // TODO: 比較ページへ遷移
       alert(`比較機能は次のステップで実装します: ${cartIds.join(", ")}`);
     }
@@ -159,38 +166,27 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 pb-32">
       {/* ヒーローセクション */}
-      <section className="bg-primary pt-20 pb-24 relative overflow-hidden">
-        {/* Decorative Element */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground tracking-tight">
-              キギョヒカ
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 font-medium">
-              企業データを、分かりやすく比較できる就活アプリ
-            </p>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
 
 
-      {/* 検索・フィルター・ソートバー (Compact Layout) */}
-      <div className="bg-white sticky top-16 z-40 border-b shadow-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center gap-2">
+      {/* 検索・フィルター・ソートバー (Floating Capsule Layout) */}
+      <div id="search-bar-section" className="sticky top-18 z-40 -mt-10 px-4 transition-all duration-300 pointer-events-none">
+        <div className="container mx-auto max-w-3xl pointer-events-auto">
+          <div className="bg-white/90 backdrop-blur-xl rounded-full shadow-xl border border-white/50 ring-1 ring-black/5 p-1.5 pl-4 flex items-center gap-2">
             {/* 1. Search Bar (Flexible) */}
             <div className="flex-1 min-w-0">
                <SearchBar
                  companies={companies}
                  onSelect={handleAddToCart}
                  selectedIds={cartIds}
+                 value={searchQuery}
+                 onChange={setSearchQuery}
                />
             </div>
             
+            <div className="h-8 w-px bg-border/60 mx-1 hidden sm:block" />
+
             {/* 2. Filter Button (Icon) */}
             <div className="flex-shrink-0">
               <FilterSheet
@@ -204,7 +200,7 @@ export default function Home() {
             </div>
 
             {/* 3. Sort Button (Icon) */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 mr-1">
               <SortSheet
                 sortOption={sortOption}
                 onSortChange={(option) => {
@@ -216,19 +212,21 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Active Filter Summary (Optional: Below the bar for context) */}
+          {/* Active Filter Summary */}
           {(selectedIndustries.length > 0 || Object.values(advancedFilters).some(f => f.min !== "" || f.max !== "")) && (
-            <div className="mt-2 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
-              {selectedIndustries.length > 0 && (
-                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded flex-shrink-0">
-                  業種: {selectedIndustries.length}件
-                </span>
-              )}
-              {Object.values(advancedFilters).some(f => f.min !== "" || f.max !== "") && (
-                 <span className="bg-primary/10 text-primary px-2 py-0.5 rounded flex-shrink-0">
-                   詳細条件あり
-                 </span>
-              )}
+            <div className="mt-3 flex justify-center">
+                <div className="inline-flex items-center gap-2 overflow-x-auto no-scrollbar text-xs bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-border/50">
+                  {selectedIndustries.length > 0 && (
+                    <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full flex-shrink-0">
+                      業種: {selectedIndustries.length}件
+                    </span>
+                  )}
+                  {Object.values(advancedFilters).some(f => f.min !== "" || f.max !== "") && (
+                     <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full flex-shrink-0">
+                       詳細条件あり
+                     </span>
+                  )}
+                </div>
             </div>
           )}
         </div>

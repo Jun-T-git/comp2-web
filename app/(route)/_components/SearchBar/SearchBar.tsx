@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/app/_shared/components/ui/badge";
 import { Input } from "@/app/_shared/components/ui/input";
 import type { Company } from "@/app/_shared/types/company.type";
 import Fuse from "fuse.js";
@@ -11,10 +10,11 @@ type SearchBarProps = {
   companies: Company[];
   onSelect: (company: Company) => void;
   selectedIds: string[];
+  value: string;
+  onChange: (value: string) => void;
 };
 
-export function SearchBar({ companies, onSelect, selectedIds }: SearchBarProps) {
-  const [query, setQuery] = useState("");
+export function SearchBar({ companies, onSelect, selectedIds, value, onChange }: SearchBarProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const fuse = useMemo(
@@ -28,28 +28,27 @@ export function SearchBar({ companies, onSelect, selectedIds }: SearchBarProps) 
   );
 
   const results = useMemo(() => {
-    if (!query.trim()) return [];
-    return fuse.search(query).slice(0, 8);
-  }, [fuse, query]);
+    if (!value.trim()) return [];
+    return fuse.search(value).slice(0, 8);
+  }, [fuse, value]);
 
   const handleSelect = (company: Company) => {
     onSelect(company);
-    setQuery("");
     setShowSuggestions(false);
   };
 
   return (
-    <div className="relative w-full max-w-xl">
+    <div className="relative w-full">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
           type="text"
           placeholder="検索..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full h-10 pl-10 text-base"
+          className="w-full h-10 pl-10 text-base border-0 bg-transparent shadow-none focus-visible:ring-0 placeholder:text-muted-foreground/50"
         />
       </div>
       
@@ -61,35 +60,10 @@ export function SearchBar({ companies, onSelect, selectedIds }: SearchBarProps) 
               <button
                 key={item.id}
                 onClick={() => handleSelect(item)}
-                disabled={isSelected}
-                className={`w-full px-4 py-3 text-left hover:bg-accent transition-colors flex items-center justify-between ${
-                  isSelected ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`w-full px-4 py-3 text-left hover:bg-accent transition-colors flex items-center justify-between ${isSelected ? 'bg-primary/5 text-primary' : ''}`}
               >
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium">{item.name}</span>
-                    <span className="text-muted-foreground text-sm">
-                      ({item.id})
-                    </span>
-                    {item.flags.is_holding && (
-                      <Badge variant="outline" className="text-xs">
-                        HD
-                      </Badge>
-                    )}
-                  </div>
-                  <span className="text-sm text-muted-foreground">
-                    {item.industry}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <span className="font-bold text-primary">
-                    {item.metrics.salary}万円
-                  </span>
-                  <span className="text-xs text-muted-foreground block">
-                    平均年収
-                  </span>
-                </div>
+                <span className="font-medium">{item.name}</span>
+                {isSelected && <span className="text-xs bg-primary/10 px-2 py-0.5 rounded">選択中</span>}
               </button>
             );
           })}

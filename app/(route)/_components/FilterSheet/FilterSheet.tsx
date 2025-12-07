@@ -4,18 +4,18 @@ import { Button } from "@/app/_shared/components/ui/button";
 import { Input } from "@/app/_shared/components/ui/input";
 import { Label } from "@/app/_shared/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger
 } from "@/app/_shared/components/ui/select";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
 } from "@/app/_shared/components/ui/sheet";
 import { Filter, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -146,7 +146,7 @@ export function FilterSheet({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="h-10 w-10 shrink-0 relative">
+        <Button variant="ghost" size="icon" className="h-10 w-10 shrink-0 relative hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors">
           <Filter className="h-4 w-4" />
           {activeCount > 0 && (
             <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground border border-white">

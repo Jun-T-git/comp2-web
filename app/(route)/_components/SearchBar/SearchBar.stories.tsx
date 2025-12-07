@@ -103,6 +103,8 @@ export const Default: Story = {
   args: {
     companies: mockCompanies,
     selectedIds: [],
+    value: '',
+    onChange: () => {},
   },
 };
 
@@ -110,6 +112,8 @@ export const WithSelectedCompanies: Story = {
   args: {
     companies: mockCompanies,
     selectedIds: ['7203', '6758'],
+    value: '',
+    onChange: () => {},
   },
 };
 
@@ -117,5 +121,7 @@ export const EmptyCompanies: Story = {
   args: {
     companies: [],
     selectedIds: [],
+    value: '',
+    onChange: () => {},
   },
 };
