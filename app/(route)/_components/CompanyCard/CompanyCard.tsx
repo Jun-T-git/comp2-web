@@ -13,6 +13,7 @@ type CompanyCardProps = {
   company: Company;
   onAddToCart?: (company: Company) => void;
   isInCart?: boolean;
+  isCartFull?: boolean;
   showAddButton?: boolean;
   highlightMetric?: SortOption | null;
 };
@@ -21,6 +22,7 @@ export function CompanyCard({
   company,
   onAddToCart,
   isInCart = false,
+  isCartFull = false,
   showAddButton = true,
   highlightMetric,
 }: CompanyCardProps) {
@@ -50,20 +52,22 @@ export function CompanyCard({
           </Badge>
           
           {showAddButton && onAddToCart && (
-            <Button
-              onClick={(e) => {
-                e.stopPropagation();
-                onAddToCart(company);
-              }}
-              size="sm"
-              className={`rounded-full h-8 px-4 text-xs font-bold transition-all ${
-                isInCart 
-                  ? "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90" 
-                  : "bg-white text-primary border border-primary hover:bg-primary/5"
-              }`}
-            >
-              {isInCart ? "選択中" : "選択"}
-            </Button>
+            <div onClick={(e) => e.stopPropagation()}>
+              <Button
+                onClick={() => {
+                  onAddToCart(company);
+                }}
+                disabled={!isInCart && isCartFull}
+                size="sm"
+                className={`rounded-full h-10 w-20 text-sm font-bold transition-all ${
+                  isInCart 
+                    ? "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90" 
+                    : "bg-white text-primary border border-primary hover:bg-primary/5"
+                }`}
+              >
+                {isInCart ? "選択中" : "選択"}
+              </Button>
+            </div>
           )}
         </div>
 

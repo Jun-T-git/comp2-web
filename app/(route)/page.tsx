@@ -134,15 +134,17 @@ export default function Home() {
     }
   }, [cartIds, isLoaded]);
 
-  const cartCompanies = companies.filter((c) => cartIds.includes(c.id));
+  const cartCompanies = cartIds
+    .map((id) => companies.find((c) => c.id === id))
+    .filter((c): c is Company => c !== undefined);
 
   const handleAddToCart = (company: Company) => {
-    if (cartIds.length >= 4) return;
     if (cartIds.includes(company.id)) {
       // 既にカートにある場合は削除（トグル動作）
       handleRemoveFromCart(company.id);
       return;
     }
+    if (cartIds.length >= 4) return;
     setCartIds((prev) => [...prev, company.id]);
   };
 
@@ -249,6 +251,7 @@ export default function Home() {
               company={company}
               onAddToCart={handleAddToCart}
               isInCart={cartIds.includes(company.id)}
+              isCartFull={cartIds.length >= 4}
               highlightMetric={sortOption}
             />
           ))}
