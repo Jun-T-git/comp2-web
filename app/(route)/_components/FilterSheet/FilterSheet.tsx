@@ -4,18 +4,18 @@ import { Button } from "@/app/_shared/components/ui/button";
 import { Input } from "@/app/_shared/components/ui/input";
 import { Label } from "@/app/_shared/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger
 } from "@/app/_shared/components/ui/select";
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 } from "@/app/_shared/components/ui/sheet";
 import { Filter, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -197,7 +197,7 @@ export function FilterSheet({
             ))}
 
             {activeKeys.size === 0 && (
-                 <div className="text-center py-8 px-4 bg-muted/10 rounded-lg border border-dashed">
+                 <div className="text-center py-8 px-3 bg-muted/10 rounded-lg border border-dashed">
                    <Filter className="h-8 w-8 mx-auto text-muted-foreground/30 mb-2" />
                    <p className="text-sm text-muted-foreground mb-1">条件が設定されていません</p>
                    <p className="text-xs text-muted-foreground/70">下のボタンから条件を追加してください</p>

@@ -6,11 +6,11 @@ export function Hero() {
       {/* Subtle decorative blob */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
 
-      <div className="container mx-auto px-4 pt-16 pb-20 md:pt-24 md:pb-28 relative z-10">
+      <div className="container mx-auto px-3 pt-16 pb-20 md:pt-24 md:pb-28 relative z-10">
         <div className="flex flex-col items-center justify-center text-center space-y-6">
           
           {/* Tagline */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-border/60 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-border/60 shadow-sm">
             <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
             <span className="text-xs font-semibold text-primary tracking-wide uppercase">Free</span>
             <span className="w-px h-3 bg-border" />

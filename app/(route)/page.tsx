@@ -175,7 +175,7 @@ export default function Home() {
 
 
       {/* 検索・フィルター・ソートバー (Floating Capsule Layout) */}
-      <div id="search-bar-section" className="sticky top-18 z-40 -mt-10 px-4 transition-all duration-300 pointer-events-none">
+      <div id="search-bar-section" className="sticky top-18 z-40 -mt-10 px-3 transition-all duration-300 pointer-events-none">
         <div className="container mx-auto max-w-3xl pointer-events-auto">
           <div className="bg-white/90 backdrop-blur-xl rounded-full shadow-xl border border-white/50 ring-1 ring-black/5 p-1.5 pl-4 flex items-center gap-2">
             {/* 1. Search Bar (Flexible) */}
@@ -237,7 +237,7 @@ export default function Home() {
       </div>
 
       {/* 企業リスト */}
-      <section className="container mx-auto px-4 py-6">
+      <section className="container mx-auto px-3 py-6">
         <div className="flex justify-between items-center mb-4">
           <p className="text-muted-foreground text-sm">
             {filteredAndSortedCompanies.length}件の企業が見つかりました

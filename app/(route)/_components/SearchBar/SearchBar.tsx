@@ -60,7 +60,7 @@ export function SearchBar({ companies, onSelect, selectedIds, value, onChange }:
               <button
                 key={item.id}
                 onClick={() => handleSelect(item)}
-                className={`w-full px-4 py-3 text-left hover:bg-accent transition-colors flex items-center justify-between ${isSelected ? 'bg-primary/5 text-primary' : ''}`}
+                className={`w-full px-3 py-3 text-left hover:bg-accent transition-colors flex items-center justify-between ${isSelected ? 'bg-primary/5 text-primary' : ''}`}
               >
                 <span className="font-medium">{item.name}</span>
                 {isSelected && <span className="text-xs bg-primary/10 px-2 py-0.5 rounded">選択中</span>}

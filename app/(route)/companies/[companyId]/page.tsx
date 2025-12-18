@@ -13,7 +13,7 @@ export default async function CompanyDetailPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 py-10 px-4 md:px-8">
+    <main className="min-h-screen bg-gray-50 py-10 px-3 md:px-8">
       <div className="container mx-auto max-w-4xl">
         <Card className="bg-white/80 backdrop-blur-sm shadow-sm border-border/60">
            <CardContent className="flex flex-col items-center justify-center min-h-[400px] text-center p-8 space-y-6">

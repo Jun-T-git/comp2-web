@@ -1,70 +1,97 @@
-import { Card, CardContent } from "@/app/_shared/components/ui/card";
-import { Suspense } from "react";
+"use client";
 
-type Props = {
-  searchParams: Promise<{ companyIds?: string }>;
-};
+import companiesData from "@/app/_shared/data/companies.json";
+import { Company } from "@/app/_shared/types/company.type";
+import { BarChart3, Table2 } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useMemo, useState } from "react";
+import { ComparisonCharts } from "./_components/ComparisonCharts/ComparisonCharts";
+import { ComparisonHeader } from "./_components/ComparisonHeader";
+import { ComparisonTable } from "./_components/ComparisonTable";
 
-function CompareContent({ companyIds }: { companyIds?: string }) {
-  const ids = companyIds?.split(",") || [];
+const allCompanies = companiesData as Company[];
+
+function ComparePageContent() {
+  const searchParams = useSearchParams();
+  const companyIdsString = searchParams.get("companyIds");
+
+  const selectedCompanies = useMemo(() => {
+    const ids = companyIdsString?.split(",") || [];
+    return allCompanies.filter((c) => ids.includes(c.id));
+  }, [companyIdsString]);
+
+
+  
+  // Need to use router hook inside component for cleaner update? 
+  // For MVP, passing a handler that redirects is fine.
+  // Actually, standard link update is safer.
+  
+  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+
+  if (selectedCompanies.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+         <div className="text-center">
+            <p className="text-muted-foreground mb-4">企業が選択されていません</p>
+            <Link href="/" className="text-primary hover:underline">トップへ戻る</Link>
+         </div>
+      </div>
+    );
+  }
 
   return (
-    <main className="min-h-screen bg-gray-50 py-10 px-4 md:px-8">
-      <div className="container mx-auto max-w-6xl">
-         <div className="mb-6 md:mb-8 text-center md:text-left">
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground">企業比較</h1>
-             <p className="text-muted-foreground mt-2">選択した企業の詳細なデータを比較します</p>
-         </div>
-         
-         <Card className="bg-white/80 backdrop-blur-sm shadow-sm border-border/60">
-             <CardContent className="flex flex-col items-center justify-center min-h-[400px] text-center p-8 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                    <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                    </span>
-                    Coming Soon
-                </div>
+    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+      <ComparisonHeader 
+        companies={selectedCompanies} 
+      />
 
-                <div className="space-y-4 max-w-2xl mx-auto">
-                    <p className="text-lg font-medium text-foreground">比較機能は現在開発中です</p>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                        複数の企業の年収、残業時間、有休取得率などを一目で比較できる機能を準備しています。<br className="hidden md:block"/>
-                        アップデートをお待ちください。
-                    </p>
-                </div>
+      <main className="container mx-auto px-3 py-6 space-y-6">
+        
+        {/* View Switcher (Segmented Control) */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-gray-200/80 p-1 rounded-full flex w-full max-w-[200px] relative">
+            <button
+              onClick={() => setViewMode('chart')}
+              className={`flex-1 flex items-center justify-center py-2 rounded-full transition-all duration-200 ${
+                viewMode === 'chart' 
+                  ? 'bg-white text-primary shadow-sm ring-1 ring-black/5' 
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-label="チャート表示"
+            >
+              <BarChart3 className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setViewMode('table')}
+              className={`flex-1 flex items-center justify-center py-2 rounded-full transition-all duration-200 ${
+                viewMode === 'table' 
+                  ? 'bg-white text-primary shadow-sm ring-1 ring-black/5' 
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-label="テーブル表示"
+            >
+              <Table2 className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
 
-                {ids.length > 0 ? (
-                    <div className="w-full max-w-md pt-4">
-                         <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wider font-semibold">Comparing {ids.length} Companies</p>
-                         <div className="flex flex-wrap justify-center gap-2">
-                            {ids.map(id => (
-                                <span key={id} className="font-mono text-xs md:text-sm bg-muted px-3 py-1.5 rounded-full text-muted-foreground border border-border/50">
-                                    {id}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                ) : (
-                    <p className="text-muted-foreground text-sm">比較する企業が選択されていません。</p>
-                )}
-             </CardContent>
-         </Card>
-      </div>
-    </main>
+        <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+          {viewMode === 'chart' ? (
+             <ComparisonCharts companies={selectedCompanies} allCompanies={allCompanies} />
+          ) : (
+             <ComparisonTable companies={selectedCompanies} />
+          )}
+        </div>
+      </main>
+    </div>
   );
 }
 
-export default async function ComparePage({ searchParams }: Props) {
-  const { companyIds } = await searchParams;
-
+export default function ComparePage() {
   return (
-    <Suspense fallback={
-        <main className="min-h-screen bg-gray-50 flex items-center justify-center">
-            <div className="animate-pulse text-muted-foreground text-sm">読み込み中...</div>
-        </main>
-    }>
-      <CompareContent companyIds={companyIds} />
+    <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+      <ComparePageContent />
     </Suspense>
   );
 }
